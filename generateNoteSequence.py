@@ -5,7 +5,11 @@ from pydub import AudioSegment
 from pydub.playback import play
 from musicalNotes import *
 
-rhythmValues = [1,2]
+maxFourNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2],[4,4,4,4]]
+maxThreeNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2]]
+maxTwoNoteRhythmChunk = [[1],[2,2]]
+maxOneNoteRhythmChunk = [[1]]
+
 
 def generateRandomNotes(notes, length):
     randomNotes = []
@@ -16,8 +20,19 @@ def generateRandomNotes(notes, length):
 
 def generateRandomRhythm(length):
     randomRhythm = []
-    for i in range(length):
-        randomRhythm.append(random.choice(rhythmValues))
+    rhythmLength = len(randomRhythm)
+    rhythmChunk = None
+    while rhythmLength < length:
+        if length - rhythmLength >= 4:
+            rhythmChunk = random.choice(maxFourNoteRhythmChunk)
+        elif length - rhythmLength >= 3:
+            rhythmChunk = random.choice(maxThreeNoteRhythmChunk)
+        elif length - rhythmLength >=2:
+            rhythmChunk = random.choice(maxTwoNoteRhythmChunk)
+        elif length - rhythmLength >=1:
+            rhythmChunk = random.choice(maxOneNoteRhythmChunk)
+        rhythmLength = rhythmLength + len(rhythmChunk)
+        randomRhythm.extend(rhythmChunk)
     return randomRhythm
 
 def constructWaveFile(randomNotes, randomRhythm):
@@ -48,10 +63,9 @@ def playAudioSegment(sound):
 if __name__ == "__main__":
     music = musicalNotes()
     notes = music.noteNames
-    randomNotes = generateRandomNotes(notes, 12)
-    randomRhythm = generateRandomRhythm(12)
-    print(randomNotes+randomRhythm)
-    sound = constructWaveFile(randomNotes, [1, 2, 2, 2, 2, 1, 4, 4, 4, 4, 1, 1])
-    print(sound)
+    randomNotes = generateRandomNotes(notes, 5)
+    randomRhythm = generateRandomRhythm(5)
+    print(str(randomRhythm)+" "+str(randomNotes))
+    sound = constructWaveFile(randomNotes, randomRhythm)
     playAudioSegment(sound)
     

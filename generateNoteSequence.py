@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings("ignore") 
 import wave
 import random
 import os

@@ -2,6 +2,7 @@ import wave
 import random
 import os
 from pydub import AudioSegment
+from musicalNotes import *
 
 def generateRandomNotes(notes, length):
     randomNotes = []
@@ -19,4 +20,5 @@ def constructWaveFile(randomNotes):
 
 if __name__ == "__main__":
     notes=['A','C#','B','D']
+    print(m)
     constructWaveFile(notes)

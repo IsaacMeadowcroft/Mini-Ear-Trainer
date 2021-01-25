@@ -51,7 +51,6 @@ def constructWaveFile(randomNotes, randomRhythm):
         else:
             combined_sounds = combined_sounds + sound[i]
 
-    combined_sounds.export(currentPath, format="wav")
     return combined_sounds
 
 def generateRhythmicAudioSegment(note, length):

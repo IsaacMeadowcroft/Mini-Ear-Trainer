@@ -5,6 +5,7 @@ class note:
     def __init__(self, filePath, noteName, notePosition):
         self.filePath = filePath
         self.noteName = noteName
+        self.notePosition = notePosition
 
 
 class musicalNotes:

@@ -2,8 +2,8 @@ import os
 
 class note:
 
-    def __init__(self, soundPath, noteName, notePosition):
-        self.soundPath = soundPath
+    def __init__(self, filePath, noteName, notePosition):
+        self.filePath = filePath
         self.noteName = noteName
 
 
@@ -20,7 +20,6 @@ class musicalNotes:
             notePath = currentPath + self.noteNames[i] + '.wav'
             curNote = note(notePath, self.noteNames[i], i)
             self.noteDict[self.noteNames[i]] = curNote
-            print(self.noteDict.get(self.noteNames[i]).noteName)
             self.noteList.append(curNote)
             
 
@@ -31,5 +30,5 @@ class musicalNotes:
 
 if __name__ == "__main__":
     m = musicalNotes()
-    print(m.getNote('C#1').noteName)
+
             

@@ -11,14 +11,23 @@ def generateRandomNotes(notes, length):
     return randomNotes
 
 def constructWaveFile(randomNotes):
-    currentPath = os.getcwd()
-    sound1 = AudioSegment.from_wav(currentPath + "/Sounds/C1.wav")
-    sound2 = AudioSegment.from_wav(currentPath + "/Sounds/C2.wav")
+    currentPath = os.getcwd() + "/Sound3.wav"
+    sound = []
 
-    combined_sounds = sound1 + sound2
-    combined_sounds.export(currentPath + "/Sound3", format="wav")
+    for i in range(len(randomNotes)):
+        note = music.getNote(randomNotes[i])
+        sound.append(AudioSegment.from_wav(note.filePath))
+
+    for i in range(len(sound)):
+        if i == 0:
+            combined_sounds = sound[i]
+        else:
+            combined_sounds = combined_sounds + sound[i]
+
+    combined_sounds.export(currentPath, format="wav")
 
 if __name__ == "__main__":
-    notes=['A','C#','B','D']
-    print(m)
-    constructWaveFile(notes)
+    music = musicalNotes()
+    notes = music.noteNames
+    constructWaveFile(generateRandomNotes(notes, 6))
+    

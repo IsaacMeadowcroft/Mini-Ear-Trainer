@@ -60,9 +60,15 @@ def generateRhythmicAudioSegment(note, length):
 def playAudioSegment(sound):
     play(sound)
 
+def playScale(scaleNotes):
+    rhythm = [2] * len(scaleNotes)
+    playAudioSegment(constructWaveFile(scaleNotes, rhythm))
+
 if __name__ == "__main__":
     music = musicalNotes()
-    notes = music.noteNames
+    notes = music.getRandomMinorScale()
+    print("TONIC IS: "+str(notes[0]))
+    playScale(notes)
     randomNotes = generateRandomNotes(notes, 5)
     randomRhythm = generateRandomRhythm(5)
     print(str(randomRhythm)+" "+str(randomNotes))

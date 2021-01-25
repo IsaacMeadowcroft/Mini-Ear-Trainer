@@ -21,6 +21,3 @@ root.resizable(width=0, height=0)
 root.mainloop();
 
 
-"""        noteList = ['A#1', 'A#2', 'A1', 'A2', 'B1', 'B2', 'C#1', 'C#2', 'C1', 'C2', 'D#1', 'D#2', \
-                    'D1', 'D2', 'E1', 'E2', 'F#1', 'F#2', 'F1', 'F2', 'G#1', 'G#2', 'G1', 'G2']"""
-

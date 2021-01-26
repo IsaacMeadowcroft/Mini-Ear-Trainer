@@ -62,8 +62,7 @@ def playAudioSegment(sound):
     play(sound)
 
 def playScale(scaleNotes):
-    scaleNotes = scaleNotes[:len(scaleNotes)]
-    scaleNotes.extend(scaleNotes[::-1])
+    scaleNotes.extend(scaleNotes[-2::-1])
     rhythm = [2] * len(scaleNotes)
     playAudioSegment(constructWaveFile(scaleNotes, rhythm))
 

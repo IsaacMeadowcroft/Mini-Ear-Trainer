@@ -53,7 +53,7 @@ def constructWaveFile(randomNotes, randomRhythm):
 
 def generateRhythmicAudioSegment(note, length):
     audioSegment = AudioSegment.from_wav(note.filePath)
-    audioSegment = audioSegment[:1500/length]
+    audioSegment = audioSegment[:1700/length]
     return audioSegment
 
 def playAudioSegment(sound):
@@ -74,4 +74,5 @@ if __name__ == "__main__":
     print(str(randomRhythm)+" "+str(randomNotes))
     sound = constructWaveFile(randomNotes, randomRhythm)
     playAudioSegment(sound)
+        
     

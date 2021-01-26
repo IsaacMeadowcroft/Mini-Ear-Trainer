@@ -1,5 +1,6 @@
 from musicalNotes import *
 from generateNoteSequence import *
+import time
 import metronome
 import piano
 
@@ -23,11 +24,14 @@ def playGeneratedNotes(randomNotes, randomRhythm):
 
 def executeEarTrainingExercise(defaultScale = "MAJOR", numberOfNotes = 5):
     notes, rhythm = generateRhythmAndNotes(displayTonicAndPlayScale(defaultScale), numberOfNotes)
+    time.sleep(0.7)
+    print("PLAYING RANDOMLY GENERATED NOTES")
     playGeneratedNotes(notes, rhythm)
-    print(str(notes)+" "+str(rhythm))
+    piano.main()
+    print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
     
 if __name__ == "__main__":
     music = musicalNotes()
-    executeEarTrainingExercise()
+    executeEarTrainingExercise("MINOR")
 
 

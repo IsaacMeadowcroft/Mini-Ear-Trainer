@@ -42,7 +42,6 @@ def label_released(event):
 
 def play(file_name):
     song_file = open(file_name, 'r')
-    print("Playback Started")
     first_line = song_file.readline().split()
     note = first_line[0]
     time_scale = float(first_line[1])
@@ -56,7 +55,6 @@ def play(file_name):
         time_scale = time
     wave_obj = sa.WaveObject.from_wave_file('sounds/' + note + '.wav')
     wave_obj.play()
-    print("Playback Stopped")
 
 
 def play_back(event):
@@ -74,7 +72,6 @@ def play_back(event):
 def record_on_off(event):
     global recording
     recording = not recording
-    print('Recording: ', recording)
     if recording:
         label_pressed(event)
     else:
@@ -104,7 +101,6 @@ def key_pressed(event):
     if note:
         wave_obj = sa.WaveObject.from_wave_file('sounds/' + note + '.wav')
         wave_obj.play()
-        print(note)
         if recording:
             record('songs/song.txt', note)
         if len(note) == 2:
@@ -131,7 +127,6 @@ def key_released(event):
 def button_pressed(event):
     wave_obj = sa.WaveObject.from_wave_file('sounds/' + event.widget.name + '.wav')
     wave_obj.play()
-    print(event.widget.name)
     if recording:
         record('songs/song.txt', event.widget.name)
     label_pressed(event)
@@ -251,6 +246,7 @@ class Piano(Frame):
 def main():
     root = Tk()
     app = Piano(root)
+    root.after(20000, lambda: root.destroy())
     app.mainloop()
 
 if __name__ == '__main__':

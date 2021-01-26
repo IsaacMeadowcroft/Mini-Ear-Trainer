@@ -2,7 +2,6 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 from time import sleep, perf_counter
 import pygame
-pygame.init()
 pygame.mixer.init()
 
 strongBeatPath=os.getcwd()+"/metronome_sounds/MetroBar1.wav"

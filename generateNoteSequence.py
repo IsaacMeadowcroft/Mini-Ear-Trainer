@@ -16,7 +16,6 @@ maxOneNoteRhythmChunk = [[1]]
 def generateRandomNotes(notes, length):
     randomNotes = []
     for i in range(length):
-        curNote = notes[random.randint(0,len(notes)-1)]
         randomNotes.append(notes[random.randint(0,len(notes)-1)])
     return randomNotes
 
@@ -38,7 +37,6 @@ def generateRandomRhythm(length):
     return randomRhythm
 
 def constructWaveFile(randomNotes, randomRhythm):
-    currentPath = os.getcwd() + "/Sound3.wav"
     sound = []
 
     for i in range(len(randomNotes)):

@@ -18,6 +18,6 @@ D4.grid(row=0, column=1, padx=0,pady=1, ipady=130, ipadx=0)
 
 
 root.resizable(width=0, height=0)
-root.mainloop();
+root.mainloop()
 
 

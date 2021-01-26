@@ -5,14 +5,18 @@ import pygame
 pygame.init()
 pygame.mixer.init()
 
-path=os.getcwd()+"/MetroBeat1.wav"
+strongBeatPath=os.getcwd()+"/MetroBar1.wav"
+weakBeatPath=os.getcwd()+"/MetroBeat1.wav"
 
 delay = d = 0.5
 #print(60 / delay, 'bpm')
 prev = perf_counter()
 for i in range(20):
     sleep(d)
-    sounda = pygame.mixer.Sound(path)
+    if i % 4 == 0:
+        sounda = pygame.mixer.Sound(strongBeatPath)
+    else:
+        sounda = pygame.mixer.Sound(weakBeatPath)
     sounda.play()
     t = perf_counter()
     delta = t - prev - delay

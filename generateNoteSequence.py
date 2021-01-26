@@ -7,6 +7,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 from musicalNotes import *
 
+music = musicalNotes()
 maxFourNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2],[4,4,4,4]]
 maxThreeNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2]]
 maxTwoNoteRhythmChunk = [[1],[2,2]]
@@ -63,16 +64,3 @@ def playScale(scaleNotes):
     scaleNotes.extend(scaleNotes[-2::-1])
     rhythm = [2] * len(scaleNotes)
     playAudioSegment(constructWaveFile(scaleNotes, rhythm))
-
-if __name__ == "__main__":
-    music = musicalNotes()
-    notes = music.getRandomMinorScale()
-    print("TONIC IS: "+str(notes[0]))
-    playScale(notes)
-    randomNotes = generateRandomNotes(notes, 5)
-    randomRhythm = generateRandomRhythm(5)
-    print(str(randomRhythm)+" "+str(randomNotes))
-    sound = constructWaveFile(randomNotes, randomRhythm)
-    playAudioSegment(sound)
-        
-    

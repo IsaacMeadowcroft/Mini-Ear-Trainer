@@ -6,7 +6,7 @@ import sys
 sys.path.insert(1, '/Users/keith/Desktop/Ear Training')
 import metronome
 
-
+recordedNotes = []
 metronomeTimeStamps = []
 start = t.time()
 
@@ -81,11 +81,11 @@ def record_on_off(event):
 
 
 def record(file_name, note):
-    song_file = open(file_name, 'a')
     end = t.time()
     time = end - start
-    song_file.write(note + ' ' + str(time))
-    song_file.write('\n')
+    recordedNotes.append((note, time))
+    #song_file.write(note + ' ' + str(time))
+    #song_file.write('\n')
 
 
 def find_label(name, array):
@@ -252,7 +252,7 @@ def main():
     #TIMEOUT AFTER 20 SECONDS
     root.after(20000, lambda: root.destroy())
     app.mainloop()
-    return metronomeTimeStamps
+    return recordedNotes, metronomeTimeStamps
 
 if __name__ == '__main__':
     main()

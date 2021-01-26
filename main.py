@@ -13,27 +13,35 @@ def displayTonicAndPlayScale(defaultScale = "MAJOR"):
     playScale(notes)
     return notes
 
-def generateRhythmAndNotes(notes, numberOfNotes = 5):
+def generateRhythmAndNotes(notes, numberOfNotes = 3):
     randomNotes = generateRandomNotes(notes, numberOfNotes)
     randomRhythm = generateRandomRhythm(numberOfNotes)
     return (randomNotes, randomRhythm)
 
 def playGeneratedNotes(randomNotes, randomRhythm):
+    print("PLAYING RANDOMLY GENERATED NOTES")
     sound = constructWaveFile(randomNotes, randomRhythm)
     play(sound)
 
-def executeEarTrainingExercise(defaultScale = "MAJOR", numberOfNotes = 5):
+def executeEarTrainingExercise(defaultScale = "MAJOR", numberOfNotes = 3):
     notes, rhythm = generateRhythmAndNotes(displayTonicAndPlayScale(defaultScale), numberOfNotes)
-    time.sleep(0.7)
-    print("PLAYING RANDOMLY GENERATED NOTES")
+    time.sleep(0.5)
     playGeneratedNotes(notes, rhythm)
-    metronomeTimeStamps = piano.main()
-    print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
-    return metronomeTimeStamps
+    recordedNotes, metronomeTimeStamps = piano.main()
+    evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm)
+
+def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
+    (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
+    if playedNotes != notes:
+        print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))
+    else:
+        print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
     
+
 if __name__ == "__main__":
     music = musicalNotes()
-    metronomeTimeStamps = executeEarTrainingExercise("MINOR")
-    print(metronomeTimeStamps)
+    executeEarTrainingExercise("MAJOR")
+    
+    
 
 

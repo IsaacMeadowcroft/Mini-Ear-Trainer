@@ -5,8 +5,8 @@ import pygame
 pygame.init()
 pygame.mixer.init()
 
-strongBeatPath=os.getcwd()+"/MetroBar1.wav"
-weakBeatPath=os.getcwd()+"/MetroBeat1.wav"
+strongBeatPath=os.getcwd()+"/metronome_sounds/MetroBar1.wav"
+weakBeatPath=os.getcwd()+"/metronome_sounds/MetroBeat1.wav"
 
 delay = d = 0.5
 #print(60 / delay, 'bpm')

@@ -8,9 +8,8 @@ strongBeatPath = "/Users/keith/Desktop/Ear Training/metronome_sounds/MetroBar1.w
 weakBeatPath = "/Users/keith/Desktop/Ear Training/metronome_sounds/MetroBeat1.wav"
 
 
-def executeMetronome():
+def executeMetronome(timeStamps):
     #60 / delay = 'bpm'
-    timeStamps = []
     delay = d = 1
     for i in range(20):
         sleep(d)
@@ -26,5 +25,5 @@ def executeMetronome():
     return timeStamps
 
 if __name__ == "__main__":
-    print(executeMetronome())
+    print(executeMetronome([]))
 

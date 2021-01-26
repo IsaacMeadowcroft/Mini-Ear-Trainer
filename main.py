@@ -27,11 +27,13 @@ def executeEarTrainingExercise(defaultScale = "MAJOR", numberOfNotes = 5):
     time.sleep(0.7)
     print("PLAYING RANDOMLY GENERATED NOTES")
     playGeneratedNotes(notes, rhythm)
-    piano.main()
+    metronomeTimeStamps = piano.main()
     print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
+    return metronomeTimeStamps
     
 if __name__ == "__main__":
     music = musicalNotes()
-    executeEarTrainingExercise("MINOR")
+    metronomeTimeStamps = executeEarTrainingExercise("MINOR")
+    print(metronomeTimeStamps)
 
 

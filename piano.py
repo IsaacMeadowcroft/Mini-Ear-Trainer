@@ -6,6 +6,8 @@ import sys
 sys.path.insert(1, '/Users/keith/Desktop/Ear Training')
 import metronome
 
+
+metronomeTimeStamps = []
 start = t.time()
 
 file = open('songs/song.txt', 'w')
@@ -162,8 +164,9 @@ KEYS_TO_NOTES = {
 class Piano(Frame):
 
     def __init__(self, parent):
+
         try:
-           start_new_thread(metronome.executeMetronome, () )
+            start_new_thread(metronome.executeMetronome, (metronomeTimeStamps,))
         except Exception as e:
             print(e)
 
@@ -246,8 +249,10 @@ class Piano(Frame):
 def main():
     root = Tk()
     app = Piano(root)
+    #TIMEOUT AFTER 20 SECONDS
     root.after(20000, lambda: root.destroy())
     app.mainloop()
+    return metronomeTimeStamps
 
 if __name__ == '__main__':
     main()

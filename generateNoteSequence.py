@@ -8,7 +8,7 @@ from pydub.playback import play
 from musicalNotes import *
 
 music = musicalNotes()
-rhythmChunks = [[1],[2,2]]
+rhythmChunks = [[1],[2,2],[0.5]]
 
 def generateRandomNotes(notes, length):
     randomNotes = []
@@ -32,7 +32,7 @@ def generateRandomRhythm(length):
         if length - rhythmLength >=2:
             rhythmChunk = random.choice(rhythmChunks)
         else:
-            rhythmChunk = [1]
+            rhythmChunk = random.choice([[1],[0.5]])
         rhythmLength = rhythmLength + len(rhythmChunk)
         randomRhythm.extend(rhythmChunk)
     return randomRhythm
@@ -54,7 +54,7 @@ def constructWaveFile(randomNotes, randomRhythm):
 
 def generateRhythmicAudioSegment(note, length):
     audioSegment = AudioSegment.from_wav(note.filePath)
-    audioSegment = audioSegment[:1500/length]
+    audioSegment = audioSegment[:1000/length]
     return audioSegment
 
 def playAudioSegment(sound):
@@ -70,13 +70,17 @@ def noteRhythmToString(rhythmList):
     rhythmString = "["
     for i in range(0,len(rhythmList)-1):
         if rhythmList[i] == 2:
-            rhythmString+="Eighth-Note, "
+            rhythmString += "Eighth-Note, "
+        elif rhythmList[i] == 1:
+            rhythmString += "Quarter-Note, "
         else:
-            rhythmString+="Quarter-Note, "
+            rhythmString += "Half-Note, "
     if rhythmList[len(rhythmList)-1] == 2:
-        rhythmString+="Eighth-Note]"
+        rhythmString += "Eighth-Note]"
+    elif rhythmList[i] == 1:
+        rhythmString += "Quarter-Note]"
     else:
-        rhythmString+="Quarter-Note]"
+        rhythmString += "Half-Note]"
     return rhythmString
         
     

@@ -47,12 +47,12 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
     if recordedNotes != []:
         (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
     if playedNotes != notes:
-        print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))
+        print("INCORRECT ANSWER: YOU PLAYED " + str(playedNotes) + " BUT THE CORRECT ANSWER WAS " + str(notes))
     else:
         if evaluateNoteRhythm(noteTimeStamps,rhythm, metronomeTimeStamps) == True:
-            print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
+            print("CORRECT ANSWER: " + str(notes) + " " + noteRhythmToString(rhythm))
         else:
-            print("THE RIGHT NOTES WERE PLAYED "+str(notes)+" BUT THE CORRECT RHYTHM IS "+str(rhythm))
+            print("THE RIGHT NOTES WERE PLAYED " + str(notes) + " BUT THE CORRECT RHYTHM IS " + noteRhythmToString(rhythm))
 
     
 

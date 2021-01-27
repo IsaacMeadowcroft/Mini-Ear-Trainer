@@ -54,7 +54,7 @@ def constructWaveFile(randomNotes, randomRhythm):
 
 def generateRhythmicAudioSegment(note, length):
     audioSegment = AudioSegment.from_wav(note.filePath)
-    audioSegment = audioSegment[:1000/length]
+    audioSegment = audioSegment[:1500/length]
     return audioSegment
 
 def playAudioSegment(sound):
@@ -65,3 +65,18 @@ def playScale(scaleNotes):
     scaleNotes.extend(scaleNotes[-2::-1])
     rhythm = [4] * len(scaleNotes)
     playAudioSegment(constructWaveFile(scaleNotes, rhythm))
+
+def noteRhythmToString(rhythmList):
+    rhythmString = "["
+    for i in range(0,len(rhythmList)-1):
+        if rhythmList[i] == 2:
+            rhythmString+="Eighth-Note, "
+        else:
+            rhythmString+="Quarter-Note, "
+    if rhythmList[len(rhythmList)-1] == 2:
+        rhythmString+="Eighth-Note]"
+    else:
+        rhythmString+="Quarter-Note]"
+    return rhythmString
+        
+    

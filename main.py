@@ -58,9 +58,9 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
 def runMultipleExercises(pianoPromptLength = 15000, length = 4):
     for i in range(length):
         if i % 2 == 0:
-            executeEarTrainingExercise("MAJOR", pianoPromptLength, 5)
+            executeEarTrainingExercise("MAJOR", pianoPromptLength)
         if i % 2 == 1:
-            executeEarTrainingExercise("MINOR", pianoPromptLength, 5)
+            executeEarTrainingExercise("MINOR", pianoPromptLength)
     
 if __name__ == "__main__":
     runMultipleExercises()

@@ -13,6 +13,20 @@ metronomeTimeStamps = []
 start = t.time()
 recording = True
 
+class CancellationToken:
+   def __init__(self):
+       self.is_cancelled = False
+
+   def cancel(self):
+       self.is_cancelled = True
+
+def on_closing(root):
+   if t.time() - start > 0:
+       global cancellationToken
+       cancellationToken.cancel()
+       root.destroy()
+
+cancellationToken = CancellationToken()
 
 def label_pressed(event):
     if len(event.widget.name) == 2:
@@ -140,9 +154,9 @@ class Piano(Frame):
 
     def __init__(self, parent):
 
-        start_new_thread(metronome.executeMetronome, (metronomeTimeStamps, keyboardPromptTime))
-
         Frame.__init__(self, parent, background='SkyBlue3')
+
+        start_new_thread(metronome.executeMetronome, (metronomeTimeStamps, cancellationToken, keyboardPromptTime))
 
         self.parent = parent
 
@@ -220,7 +234,8 @@ def main(pianoPromptTime):
     keyboardPromptTime = int(pianoPromptTime / 1000)
     root = Tk()
     app = Piano(root)
-    root.after(pianoPromptTime, lambda: root.destroy())
+    root.protocol("WM_DELETE_WINDOW", lambda: on_closing(root))
+    #root.after(pianoPromptTime, lambda: root.destroy())
     app.mainloop()
     return deepCopyNotesAndMetronomeLists()
 

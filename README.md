@@ -20,7 +20,8 @@ pip3 install pygame
 
 ## Usage
 
-```python3 main.py
+```
+python3 main.py
 ```
 
 ## License

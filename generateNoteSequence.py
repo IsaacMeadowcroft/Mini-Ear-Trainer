@@ -81,17 +81,17 @@ def noteRhythmToString(rhythmList):
     rhythmString = "["
     for i in range(0,len(rhythmList)-1):
         if rhythmList[i] == 0.25:
-            rhythmString += "Whole-Note, "
-        elif rhythmList[i] == 1:
-            rhythmString += "Quarter-Note, "
-        else:
             rhythmString += "Half-Note, "
+        elif rhythmList[i] == 1:
+            rhythmString += "Eigth-Note, "
+        else:
+            rhythmString += "Quarter-Note, "
     if rhythmList[len(rhythmList)-1] == 0.25:
-        rhythmString += "Whole-Note]"
-    elif rhythmList[i] == 1:
-        rhythmString += "Quarter-Note]"
-    else:
         rhythmString += "Half-Note]"
+    elif rhythmList[i] == 1:
+        rhythmString += "Eigth-Note]"
+    else:
+        rhythmString += "Quarter-Note]"
     return rhythmString
 
 if __name__ == "__main__":

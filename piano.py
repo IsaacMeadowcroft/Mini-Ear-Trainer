@@ -99,6 +99,15 @@ def button_pressed(event):
         record(event.widget.name)
     label_pressed(event)
 
+def deepCopyNotesAndMetronomeLists():
+    global recordedNotes
+    global metronomeTimeStamps
+    recNotes = recordedNotes.copy()
+    metroStamps = metronomeTimeStamps.copy()
+    recordedNotes = []
+    metronomeTimeStamps = []
+    return recNotes, metroStamps
+
 KEYS_TO_NOTES = {
     'z': 'C1',
     'x': 'D1',
@@ -213,7 +222,7 @@ def main(pianoPromptTime):
     app = Piano(root)
     root.after(pianoPromptTime, lambda: root.destroy())
     app.mainloop()
-    return recordedNotes, metronomeTimeStamps
+    return deepCopyNotesAndMetronomeLists()
 
 if __name__ == "__main__":
     main(5000)

@@ -255,7 +255,7 @@ def main(pianoPromptTime):
     root.after(pianoPromptTime, lambda: root.destroy())
     app.mainloop()
     print(recordedNotes, metronomeTimeStamps)
-    return recordedNotes, metronomeTimeStamps
+    return (recordedNotes, metronomeTimeStamps)
 
 if __name__ == "__main__":
     main(5000)

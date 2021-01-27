@@ -50,11 +50,24 @@ def constructWaveFile(randomNotes, randomRhythm):
         else:
             combined_sounds = combined_sounds + sound[i]
 
-    return combined_sounds
+    return combined_sounds.overlay(generateMetronomeWaveFile(combined_sounds.duration_seconds))
+
+def generateMetronomeWaveFile(length):
+    one_sec_segment = AudioSegment.silent(duration=1000)
+    beat1 = AudioSegment.from_wav(os.getcwd()+"/metronome_sounds/MetroBeat1.wav")
+    beat2 = AudioSegment.from_wav(os.getcwd()+"/metronome_sounds/MetroBar1.wav")
+    overlayed1 = one_sec_segment.overlay(beat1)
+    overlayed2 = one_sec_segment.overlay(beat2)
+    mergedSegment = (overlayed2+overlayed1+overlayed1+overlayed1)
+    length-=4
+    while(length>0):
+        mergedSegment+=mergedSegment
+        length-=4
+    return mergedSegment
 
 def generateRhythmicAudioSegment(note, length):
-    audioSegment = AudioSegment.from_wav(note.filePath)
-    audioSegment = audioSegment[:1000/length]
+    audioSegment = AudioSegment.from_wav(note.filePath).overlay(AudioSegment.silent(duration=4000))
+    audioSegment = audioSegment[:2000/length]
     return audioSegment
 
 def playAudioSegment(sound):
@@ -82,5 +95,7 @@ def noteRhythmToString(rhythmList):
     else:
         rhythmString += "Half-Note]"
     return rhythmString
-        
+
+if __name__ == "__main__":
+    play(generateMetronomeWaveFile(8))
     

@@ -8,7 +8,7 @@ from pydub.playback import play
 from musicalNotes import *
 
 music = musicalNotes()
-rhythmChunks = [[1],[2,2],[0.5]]
+rhythmChunks = [[1],[0.5],[0.25]]
 
 def generateRandomNotes(notes, length):
     randomNotes = []
@@ -29,10 +29,7 @@ def generateRandomRhythm(length):
     rhythmLength = len(randomRhythm)
     rhythmChunk = None
     while rhythmLength < length:
-        if length - rhythmLength >=2:
-            rhythmChunk = random.choice(rhythmChunks)
-        else:
-            rhythmChunk = random.choice([[1],[0.5]])
+        rhythmChunk = random.choice(rhythmChunks)
         rhythmLength = rhythmLength + len(rhythmChunk)
         randomRhythm.extend(rhythmChunk)
     return randomRhythm
@@ -66,8 +63,9 @@ def generateMetronomeWaveFile(length):
     return mergedSegment
 
 def generateRhythmicAudioSegment(note, length):
-    audioSegment = AudioSegment.from_wav(note.filePath).overlay(AudioSegment.silent(duration=4000))
-    audioSegment = audioSegment[:2000/length]
+    audioSegment = AudioSegment.silent(duration=4000).overlay(AudioSegment.from_wav(note.filePath))
+    size = int(500 / length)
+    audioSegment = audioSegment[:size]
     return audioSegment
 
 def playAudioSegment(sound):
@@ -76,20 +74,20 @@ def playAudioSegment(sound):
 def playScale(scaleNotes):
     scaleNotes = scaleNotes.copy()
     scaleNotes.extend(scaleNotes[-2::-1])
-    rhythm = [4] * len(scaleNotes)
+    rhythm = [1] * len(scaleNotes)
     playAudioSegment(constructWaveFile(scaleNotes, rhythm))
 
 def noteRhythmToString(rhythmList):
     rhythmString = "["
     for i in range(0,len(rhythmList)-1):
-        if rhythmList[i] == 2:
-            rhythmString += "Eighth-Note, "
+        if rhythmList[i] == 0.25:
+            rhythmString += "Whole-Note, "
         elif rhythmList[i] == 1:
             rhythmString += "Quarter-Note, "
         else:
             rhythmString += "Half-Note, "
-    if rhythmList[len(rhythmList)-1] == 2:
-        rhythmString += "Eighth-Note]"
+    if rhythmList[len(rhythmList)-1] == 0.25:
+        rhythmString += "Whole-Note]"
     elif rhythmList[i] == 1:
         rhythmString += "Quarter-Note]"
     else:
@@ -97,5 +95,5 @@ def noteRhythmToString(rhythmList):
     return rhythmString
 
 if __name__ == "__main__":
-    play(generateMetronomeWaveFile(8))
+    play(constructWaveFile(['C1','C1','C1'], [0.5,0.5,0.5]))
     

@@ -33,13 +33,11 @@ def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000
 
 def evaluateNoteRhythm(noteTimeStamps,rhythm, metronomeTimeStamps):
     for i in range(0, len(rhythm)-1):
-        print(abs(noteTimeStamps[i+1] - (noteTimeStamps[i])))
-        print(rhythm[i])
-        if rhythm[i] == 0.5 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+2)) > 0.2):
+        if rhythm[i] == 0.5 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+1)) > 0.2):
             return False
-        if rhythm[i] == 1 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+1)) > 0.2):
+        if rhythm[i] == 0.25 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+2)) > 0.2):
             return False
-        if rhythm[i] == 2 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+0.5)) > 0.2):
+        if rhythm[i] == 1 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+0.5)) > 0.2):
             return False
     return True
 
@@ -61,7 +59,7 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
 if __name__ == "__main__":
     music = musicalNotes()
     pianoPromptLength = 15000
-    executeEarTrainingExercise("MAJOR", pianoPromptLength)
+    executeEarTrainingExercise("MINOR", pianoPromptLength)
     
     
 

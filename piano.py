@@ -1,6 +1,7 @@
 from tkinter import Tk, Frame, BOTH, Label, PhotoImage
 import simpleaudio as sa
 import time as t
+import _thread
 from _thread import start_new_thread
 import sys
 sys.path.insert(1, '/Users/keith/Desktop/Ear Training')
@@ -70,7 +71,6 @@ def play_back(event):
         # This line starts a new thread and runs the method
         # play on that new thread. Go concurrency!
         start_new_thread(play, ('songs/song.txt',))
-
 
 def record_on_off(event):
     global recording
@@ -166,10 +166,7 @@ class Piano(Frame):
 
     def __init__(self, parent):
 
-        try:
-            start_new_thread(metronome.executeMetronome, (metronomeTimeStamps, keyboardPromptTime))
-        except Exception as e:
-            print(e)
+        start_new_thread(metronome.executeMetronome, (metronomeTimeStamps, keyboardPromptTime))
 
         Frame.__init__(self, parent, background='SkyBlue3')
 
@@ -254,8 +251,7 @@ def main(pianoPromptTime):
     app = Piano(root)
     root.after(pianoPromptTime, lambda: root.destroy())
     app.mainloop()
-    print(recordedNotes, metronomeTimeStamps)
-    return (recordedNotes, metronomeTimeStamps)
+    return recordedNotes, metronomeTimeStamps
 
 if __name__ == "__main__":
     main(5000)

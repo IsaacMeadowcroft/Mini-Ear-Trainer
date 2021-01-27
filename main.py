@@ -28,13 +28,12 @@ def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000
     time.sleep(0.5)
     playGeneratedNotes(notes, rhythm)
     recordedNotes, metronomeTimeStamps = piano.main(pianoPromptLength)
-    print(recordedNotes, metronomeTimeStamps)
     evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm)
 
 def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
     playedNotes = []
     noteTimeStamps = []
-    if type(recordedNotes) is tuple:
+    if all(isinstance(i, tuple) for i in recordedNotes):
         (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
     if playedNotes != notes:
         print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))
@@ -44,7 +43,7 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
 
 if __name__ == "__main__":
     music = musicalNotes()
-    pianoPromptLength = 2000
+    pianoPromptLength = 15000
     executeEarTrainingExercise("MAJOR", pianoPromptLength)
     
     

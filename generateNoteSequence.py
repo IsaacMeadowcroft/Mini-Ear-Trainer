@@ -54,7 +54,7 @@ def constructWaveFile(randomNotes, randomRhythm):
 
 def generateRhythmicAudioSegment(note, length):
     audioSegment = AudioSegment.from_wav(note.filePath)
-    audioSegment = audioSegment[:3000/length]
+    audioSegment = audioSegment[:1000/length]
     return audioSegment
 
 def playAudioSegment(sound):

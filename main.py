@@ -31,6 +31,16 @@ def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000
     recordedNotes, metronomeTimeStamps = piano.main(pianoPromptLength)
     evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm)
 
+def evaluateNoteRhythm(noteTimeStamps,rhythm, metronomeTimeStamps):
+    for i in range(0, len(rhythm)-1):
+        print(abs(noteTimeStamps[i+1] - (noteTimeStamps[i])))
+        print(rhythm[i])
+        if rhythm[i] == 1 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+1)) > 0.2):
+            return False
+        if rhythm[i] == 2 and (abs(noteTimeStamps[i+1] - (noteTimeStamps[i]+0.5)) > 0.2):
+            return False
+    return True
+
 def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
     playedNotes = []
     noteTimeStamps = []
@@ -39,7 +49,11 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
     if playedNotes != notes:
         print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))
     else:
-        print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
+        if evaluateNoteRhythm(noteTimeStamps,rhythm, metronomeTimeStamps) == True:
+            print("CORRECT ANSWER: "+str(notes)+" "+str(rhythm))
+        else:
+            print("THE RIGHT NOTES WERE PLAYED "+str(notes)+" BUT THE CORRECT RHYTHM IS "+str(rhythm))
+
     
 
 if __name__ == "__main__":

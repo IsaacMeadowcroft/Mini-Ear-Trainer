@@ -40,34 +40,6 @@ def label_released(event):
     event.widget.configure(image=key_img)
     event.widget.image = key_img
 
-def play(file_name):
-    song_file = open(file_name, 'r')
-    first_line = song_file.readline().split()
-    note = first_line[0]
-    time_scale = float(first_line[1])
-    for line in song_file:
-        wave_obj = sa.WaveObject.from_wave_file('sounds/' + note + '.wav')
-        wave_obj.play()
-        line_elements = line.split()
-        note = line_elements[0]
-        time = float(line_elements[1])
-        t.sleep(time - time_scale)
-        time_scale = time
-    wave_obj = sa.WaveObject.from_wave_file('sounds/' + note + '.wav')
-    wave_obj.play()
-
-
-def play_back(event):
-    if event.char == '1':
-        start_new_thread(play, ('songs/1.txt',))
-    elif event.char == '2':
-        start_new_thread(play, ('songs/2.txt',))
-    else:
-        label_pressed(event)
-        # This line starts a new thread and runs the method
-        # play on that new thread. Go concurrency!
-        start_new_thread(play, ('songs/song.txt',))
-
 def record_on_off(event):
     global recording
     recording = not recording
@@ -77,13 +49,10 @@ def record_on_off(event):
         label_released(event)
 
 
-def record(file_name, note):
+def record(note):
     end = t.time()
     time = end - start
     recordedNotes.append((note, time))
-    #song_file.write(note + ' ' + str(time))
-    #song_file.write('\n')
-
 
 def find_label(name, array):
     for x in range(len(array)):
@@ -101,7 +70,7 @@ def key_pressed(event):
         wave_obj = sa.WaveObject.from_wave_file('sounds/' + note + '.wav')
         wave_obj.play()
         if recording:
-            record('songs/song.txt', note)
+            record(note)
         if len(note) == 2:
             img = 'pictures/white_key_pressed.gif'
         else:
@@ -127,7 +96,7 @@ def button_pressed(event):
     wave_obj = sa.WaveObject.from_wave_file('sounds/' + event.widget.name + '.wav')
     wave_obj.play()
     if recording:
-        record('songs/song.txt', event.widget.name)
+        record(event.widget.name)
     label_pressed(event)
 
 KEYS_TO_NOTES = {
@@ -224,9 +193,6 @@ class Piano(Frame):
         self.parent.bind('<KeyPress>', key_pressed)
         self.parent.bind('<KeyRelease>', key_released)
 
-
-        self.parent.bind('1', play_back)
-        self.parent.bind('2', play_back)
 
         self.pack(fill=BOTH, expand=1)
 

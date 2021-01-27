@@ -7,6 +7,7 @@ sys.path.insert(1, '/Users/keith/Desktop/Ear Training')
 import metronome
 
 recordedNotes = []
+keyboardPromptTime = 20
 metronomeTimeStamps = []
 start = t.time()
 
@@ -166,7 +167,7 @@ class Piano(Frame):
     def __init__(self, parent):
 
         try:
-            start_new_thread(metronome.executeMetronome, (metronomeTimeStamps,))
+            start_new_thread(metronome.executeMetronome, (metronomeTimeStamps, keyboardPromptTime))
         except Exception as e:
             print(e)
 
@@ -246,13 +247,16 @@ class Piano(Frame):
         label.bind('<ButtonRelease-1>', label_released)
         return label
 
-def main():
+def main(pianoPromptTime):
+    global keyboardPromptTime
+    keyboardPromptTime = int(pianoPromptTime / 1000)
     root = Tk()
     app = Piano(root)
-    #TIMEOUT AFTER 20 SECONDS
-    root.after(20000, lambda: root.destroy())
+    root.after(pianoPromptTime, lambda: root.destroy())
     app.mainloop()
+    print(recordedNotes, metronomeTimeStamps)
     return recordedNotes, metronomeTimeStamps
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    main(5000)
+

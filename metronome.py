@@ -8,10 +8,10 @@ strongBeatPath = "/Users/keith/Desktop/Ear Training/metronome_sounds/MetroBar1.w
 weakBeatPath = "/Users/keith/Desktop/Ear Training/metronome_sounds/MetroBeat1.wav"
 
 
-def executeMetronome(timeStamps):
+def executeMetronome(timeStamps, length = 20):
     #60 / delay = 'bpm'
     delay = d = 1
-    for i in range(20):
+    for i in range(length):
         sleep(d)
         
         if i % 4 == 0:

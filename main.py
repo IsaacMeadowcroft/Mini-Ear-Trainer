@@ -23,15 +23,19 @@ def playGeneratedNotes(randomNotes, randomRhythm):
     sound = constructWaveFile(randomNotes, randomRhythm)
     play(sound)
 
-def executeEarTrainingExercise(defaultScale = "MAJOR", numberOfNotes = 3):
+def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000, numberOfNotes = 3):
     notes, rhythm = generateRhythmAndNotes(displayTonicAndPlayScale(defaultScale), numberOfNotes)
     time.sleep(0.5)
     playGeneratedNotes(notes, rhythm)
-    recordedNotes, metronomeTimeStamps = piano.main()
+    recordedNotes, metronomeTimeStamps = piano.main(pianoPromptLength)
+    print(recordedNotes, metronomeTimeStamps)
     evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm)
 
 def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
-    (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
+    playedNotes = []
+    noteTimeStamps = []
+    if type(recordedNotes) is tuple:
+        (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
     if playedNotes != notes:
         print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))
     else:
@@ -40,7 +44,8 @@ def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
 
 if __name__ == "__main__":
     music = musicalNotes()
-    executeEarTrainingExercise("MAJOR")
+    pianoPromptLength = 2000
+    executeEarTrainingExercise("MAJOR", pianoPromptLength)
     
     
 

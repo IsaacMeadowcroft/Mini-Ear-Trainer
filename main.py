@@ -34,7 +34,7 @@ def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000
 def evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm):
     playedNotes = []
     noteTimeStamps = []
-    if all(isinstance(i, tuple) for i in recordedNotes):
+    if recordedNotes != []:
         (playedNotes, noteTimeStamps) = list(map(list, zip(*recordedNotes)))
     if playedNotes != notes:
         print("INCORRECT ANSWER: YOU PLAYED "+str(playedNotes)+" BUT THE CORRECT ANSWER WAS "+str(notes))

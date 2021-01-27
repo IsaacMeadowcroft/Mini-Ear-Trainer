@@ -20,9 +20,9 @@ def generateRandomNotes(notes, length):
         probability = random.random()
         if probability < .5:
             randomNotes.append(notes[0])
-        elif probability < .7:
+        elif probability < .8:
             randomNotes.append(random.choice([notes[2], notes[4]]))
-        elif probability < .85:
+        elif probability < .95:
             randomNotes.append(random.choice([notes[3], notes[1]]))
         elif probability < 1:
             randomNotes.append(random.choice([notes[5],notes[7],notes[6]]))

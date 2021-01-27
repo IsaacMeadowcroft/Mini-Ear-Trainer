@@ -8,11 +8,7 @@ from pydub.playback import play
 from musicalNotes import *
 
 music = musicalNotes()
-maxFourNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2],[4,4,4,4]]
-maxThreeNoteRhythmChunk = [[1],[2,2],[2,4,4],[4,4,2]]
-maxTwoNoteRhythmChunk = [[1],[2,2]]
-maxOneNoteRhythmChunk = [[1]]
-
+rhythmChunks = [[1],[2,2]]
 
 def generateRandomNotes(notes, length):
     randomNotes = []
@@ -33,14 +29,10 @@ def generateRandomRhythm(length):
     rhythmLength = len(randomRhythm)
     rhythmChunk = None
     while rhythmLength < length:
-        if length - rhythmLength >= 4:
-            rhythmChunk = random.choice(maxFourNoteRhythmChunk)
-        elif length - rhythmLength >= 3:
-            rhythmChunk = random.choice(maxThreeNoteRhythmChunk)
-        elif length - rhythmLength >=2:
-            rhythmChunk = random.choice(maxTwoNoteRhythmChunk)
-        elif length - rhythmLength >=1:
-            rhythmChunk = random.choice(maxOneNoteRhythmChunk)
+        if length - rhythmLength >=2:
+            rhythmChunk = random.choice(rhythmChunks)
+        else:
+            rhythmChunk = [1]
         rhythmLength = rhythmLength + len(rhythmChunk)
         randomRhythm.extend(rhythmChunk)
     return randomRhythm

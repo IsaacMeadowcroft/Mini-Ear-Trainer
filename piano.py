@@ -11,10 +11,6 @@ recordedNotes = []
 keyboardPromptTime = 20
 metronomeTimeStamps = []
 start = t.time()
-
-file = open('songs/song.txt', 'w')
-file.close()
-
 recording = True
 
 

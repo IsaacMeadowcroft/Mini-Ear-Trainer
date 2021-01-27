@@ -10,6 +10,7 @@ def displayTonicAndPlayScale(defaultScale = "MAJOR"):
     elif defaultScale == "MINOR":
         notes = music.getRandomMinorScale()
     print("TONIC IS: "+str(notes[0]))
+    print("SCALE NOTES ARE: " + str(notes))
     playScale(notes)
     return notes
 
@@ -25,7 +26,7 @@ def playGeneratedNotes(randomNotes, randomRhythm):
 
 def executeEarTrainingExercise(defaultScale = "MAJOR", pianoPromptLength = 20000, numberOfNotes = 3):
     notes, rhythm = generateRhythmAndNotes(displayTonicAndPlayScale(defaultScale), numberOfNotes)
-    time.sleep(0.5)
+    time.sleep(1)
     playGeneratedNotes(notes, rhythm)
     recordedNotes, metronomeTimeStamps = piano.main(pianoPromptLength)
     evaluateExerciseResponse(recordedNotes, metronomeTimeStamps, notes, rhythm)

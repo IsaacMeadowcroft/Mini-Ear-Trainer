@@ -8,7 +8,7 @@ Want to improve your musical ear and unlock the hidden Miles Davis or Charlie Pa
 
 ## Demo
 
-A video presentation of the project and a demo can be seen at: https://www.youtube.com/watch?v=MnkjUu6x-_0
+A video presentation of the project can be seen at: https://www.youtube.com/watch?v=MnkjUu6x-_0
 
 ## Installation
 
